@@ -1,0 +1,9 @@
+
+.abs_holder{
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(14, 141, 158, 0.7),
+        rgba(6, 119, 66, 0.7));
+}
