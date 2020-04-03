@@ -3,7 +3,9 @@ body{
         to right bottom,
         rgba(195, 223, 210, 0.075),
         rgba(179, 231, 207, 0.075)),
-        url('https://media.giphy.com/media/3o7aD5lNmqChBB5yE0/giphy.gif');
+        url("./imgs/slow_pizza.gif");
+        /* url('https://media.giphy.com/media/3osxYjITKBnDpv5orK/giphy.gif'); */
+        /* url('https://media.giphy.com/media/3o7aD5lNmqChBB5yE0/giphy.gif'); */
     
     background-size: cover;
 }
