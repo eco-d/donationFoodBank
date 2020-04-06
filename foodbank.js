@@ -3,13 +3,13 @@ var tab_id = 2;
 var sold_jobs = [];
 
 async function getGsheetData(sheetId, tabId) {
-  // Steps to set this up
-  // 1. publish all the sheets you want to get data from in gSheets
-  // 2. allow links in the sharing properties
-  // 3. retrieve the sheetId from the url
-  //      - looks like this: '1qkR5ALHeEe8TKRBiiAiw_mFmhJ4HsNDPvgulL0ccGhM'
-  // 4. determine the tabId. This should be an integer starting at 1
-  //    in the order the tabs were created
+    // Steps to set this up
+    // 1. publish all the sheets you want to get data from in gSheets
+    // 2. allow links in the sharing properties
+    // 3. retrieve the sheetId from the url
+    //      - looks like this: '1qkR5ALHeEe8TKRBiiAiw_mFmhJ4HsNDPvgulL0ccGhM'
+    // 4. determine the tabId. This should be an integer starting at 1
+    //    in the order the tabs were created
     var nums = [];
     var url = `https://spreadsheets.google.com/feeds/cells/${sheetId}/${tabId}/public/values?alt=json`;
     var dt = [];
@@ -17,14 +17,14 @@ async function getGsheetData(sheetId, tabId) {
     await $.getJSON(url, function (data) {
         var entry = data.feed.entry;
         for (var i = 0; i < entry.length; i++) {
-        let e = entry[i];
-        let c = { row: getEntryRow(e), col: getEntryCol(e), val: e.content.$t };
-        if (c.row == "1") {
-            dt.push(c.val);
-            arr[c.val] = [];
-        } else {
-            arr[dt[parseInt(c.col) - 1]].push(c.val);
-        }
+            let e = entry[i];
+            let c = { row: getEntryRow(e), col: getEntryCol(e), val: e.content.$t };
+            if (c.row == "1") {
+                dt.push(c.val);
+                arr[c.val] = [];
+            } else {
+                arr[dt[parseInt(c.col) - 1]].push(c.val);
+            }
         }
     });
     let headers = Object.keys(arr)
@@ -74,7 +74,7 @@ getGsheetData(sheet_id, tab_id).then((data) => {
     var l = values_arry.length
 
     console.log(l)
-    var current = values_arry[l-1]
+    var current = values_arry[l - 1]
     var day_before = values_arry[l - 2]
     var current_donations = 5000 + (current * 5)
     var today_add = (current - day_before) * 5
@@ -83,4 +83,42 @@ getGsheetData(sheet_id, tab_id).then((data) => {
     $('#total_donation_text').html("$" + current_donations)
     $('#difference_text').html("$" + today_add)
     $('#grocery_text').html("$" + grocery_total)
-})
+
+    function getXandY(data) {
+        let xy = [];
+        for (i in values_arry) {
+            xy.push({ x: new Date(data["Completion Date"][i]), y: values_arry[i] * 5 + 5000 })
+        }
+        return xy
+    }
+    window.onload = function () {
+
+        var options = {
+            animationEnabled: true,
+            theme: "light2",
+            backgroundColor: "rgba(48,43,40,0)",
+            axisX: {
+                valueFormatString: "MMM DD"
+            },
+            axisY: {
+                title: "Donations (in USD)",
+                prefix: "$",
+                includeZero: false
+            },
+            data: [{
+                yValueFormatString: "$#,###",
+                xValueFormatString: "D",
+                type: "splineArea",
+                lineThickness: 3,
+                markerType: "none",
+                indexLabel: "{y}", //Shows y value on all Data Points
+                indexLabelFontColor: "white",
+                indexLabelFontSize: 16,
+                indexLabelPlacement: "outside",
+                dataPoints: getXandY(data)
+            }]
+        };
+
+        $("#chartContainer").CanvasJSChart(options);
+    }
+});

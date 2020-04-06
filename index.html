@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,44 +11,13 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/432d3ed90f.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment-js@1.1.15/build/moment.min.js"></script>
     <!--Style Sheet-->
     <link rel="stylesheet" href="foodbank.css">
 </head>
 
 <script>
-    window.onload = function () {
-
-        var options = {
-            animationEnabled: false,
-            theme: "dark2",
-            backgroundColor: "rgba(48,43,40,0.85)",
-            axisX: {
-                valueFormatString: "MMM DD"
-            },
-            axisY: {
-                title: "Donations (in USD)",
-                prefix: "$",
-                includeZero: false
-            },
-            data: [{
-                yValueFormatString: "$#,###",
-                xValueFormatString: "D",
-                type: "spline",
-                lineThickness: 3,
-                markerType: "none",
-                dataPoints: [
-                    { x: new Date(2020, 3, 1), y: 5345 },
-                    { x: new Date(2020, 3, 2), y: 5655 },
-                    { x: new Date(2020, 3, 3), y: 6040 },
-                    { x: new Date(2020, 3, 4), y: 6085 },
-                    { x: new Date(2020, 3, 5), y: 6095 },
-                    { x: new Date(2020, 3, 6), y: 6095 }
-                ]
-            }]
-        };
-        $("#chartContainer").CanvasJSChart(options);
-
-    }
 </script>
 
 <body>
@@ -84,7 +54,7 @@
         </div>
     </div>
 
-    
+
 
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -106,4 +76,5 @@
     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>
+
 </html>
