@@ -1,5 +1,6 @@
-var sheet_id = '1jMFwU5FhU34NtzI3qze72wW7mQNQufLp_d8UHD6lMJIA45y';
-var tab_id = 3;
+var sheet_id = '1ywAzEGnIrkPSlslY7MW86z7Pt41fb5ijN-8CawIxTfM';
+var tab_id = 2;
+var sold_jobs = [];
 
 async function getGsheetData(sheetId, tabId) {
   // Steps to set this up
@@ -52,4 +53,34 @@ function runningTotal(array) {
     return rt
 }
 
-console.log(getGsheetData(sheet_id, tab_id))
+function runningTotal(array) {
+    let rt = []
+    for (i in array) {
+        if (i == 0) {
+            rt[i] = parseInt(array[i])
+        } else {
+            rt[i] = rt[i - 1] + parseInt(array[i])
+        }
+    }
+    return rt
+}
+
+
+getGsheetData(sheet_id, tab_id).then((data) => {
+    var d = data['Sold Jobs']
+    console.log('running total: ', runningTotal(d))
+    var values_arry = runningTotal(d)
+
+    var l = values_arry.length
+
+    console.log(l)
+    var current = values_arry[l-1]
+    var day_before = values_arry[l - 2]
+    var current_donations = 5000 + (current * 5)
+    var today_add = (current - day_before) * 5
+    var grocery_total = current_donations * 9
+
+    $('#total_donation_text').html("$" + current_donations)
+    $('#difference_text').html("$" + today_add)
+    $('#grocery_text').html("$" + grocery_total)
+})

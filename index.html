@@ -13,28 +13,74 @@
     <!--Style Sheet-->
     <link rel="stylesheet" href="foodbank.css">
 </head>
+
+<script>
+    window.onload = function () {
+
+        var options = {
+            animationEnabled: false,
+            theme: "dark2",
+            backgroundColor: "rgba(48,43,40,0.85)",
+            axisX: {
+                valueFormatString: "MMM DD"
+            },
+            axisY: {
+                title: "Donations (in USD)",
+                prefix: "$",
+                includeZero: false
+            },
+            data: [{
+                yValueFormatString: "$#,###",
+                xValueFormatString: "D",
+                type: "spline",
+                lineThickness: 3,
+                markerType: "none",
+                dataPoints: [
+                    { x: new Date(2020, 3, 1), y: 5345 },
+                    { x: new Date(2020, 3, 2), y: 5655 },
+                    { x: new Date(2020, 3, 3), y: 6040 },
+                    { x: new Date(2020, 3, 4), y: 6085 },
+                    { x: new Date(2020, 3, 5), y: 6095 },
+                    { x: new Date(2020, 3, 6), y: 6095 }
+                ]
+            }]
+        };
+        $("#chartContainer").CanvasJSChart(options);
+
+    }
+</script>
+
 <body>
-    <!-- <nav class="navbar navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h1">EcoDonations</span>
-    </nav> -->
 
     <div class="abs_holder">
 
+        <div class="grid_box">
 
+            <div id="ti" class="title">
+                <h1 class="title_text">Ecoplumbers Mid-Ohio Food Bank Donations</h1>
+            </div>
 
-        <div class="text_box">
+            <div id="td" class="total_donations">
+                <h3 class="text_important">Total Donations</h3>
+                <h2 id="total_donation_text" class="numbers">$5000</h2>
+            </div>
 
-            <h1 class="big_text" >Mid-Ohio Food Pantry Donation Challenge</h1>
+            <div id="gv" class="grocery_value">
+                <h3 class="text_important">Grocery Value</h3>
+                <h2 id="grocery_text" class="numbers">$45000</h2>
+            </div>
 
-            <br>
+            <div id="dfy" class="difference_from_yesterday">
+                <h3 class="text_important">Yesterday's Add</h3>
+                <h2 id="difference_text" class="numbers">$350</h2>
+            </div>
 
-            <h1>Total Dollars Donated</h1>
-            <h1 class="big_donation_number">$<span id="money_donated">5000</span></h1>
+            <div id="ch" class="chart">
+                <div id="chartContainer" style="height: 100%; width: 100%; background-color: rgba(250,250,250,0.4);">
 
-            <br>
+                </div>
+            </div>
 
-            <h1>Value of Groceries</h1>
-            <h1 class="big_donation_number">$<span id="grocery_value">45000</span></h1>
         </div>
     </div>
 
@@ -50,9 +96,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="foodbank.js"></script>
+
+    <!-- Canvas.js -->
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>
 </html>
