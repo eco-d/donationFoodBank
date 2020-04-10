@@ -96,7 +96,7 @@ getGsheetData(sheet_id, tab_id).then((data) => {
         var options = {
             animationEnabled: true,
             theme: "light2",
-            backgroundColor: "rgba(48,43,40,0)",
+            backgroundColor: "rgba(48,43,40,0.5)",
             axisX: {
                 valueFormatString: "MMM DD"
             },
